@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'GXLAMapNaviKit_Example' do
+  pod 'GXLAMapNaviKit', :path => '../'
+
+  target 'GXLAMapNaviKit_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
