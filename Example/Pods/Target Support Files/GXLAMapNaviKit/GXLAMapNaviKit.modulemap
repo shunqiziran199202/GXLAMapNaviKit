@@ -1,0 +1,6 @@
+framework module GXLAMapNaviKit {
+  umbrella header "GXLAMapNaviKit-umbrella.h"
+
+  export *
+  module * { export * }
+}

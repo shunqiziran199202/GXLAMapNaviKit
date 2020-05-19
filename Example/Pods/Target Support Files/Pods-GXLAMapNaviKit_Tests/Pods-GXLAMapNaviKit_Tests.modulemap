@@ -1,0 +1,6 @@
+framework module Pods_GXLAMapNaviKit_Tests {
+  umbrella header "Pods-GXLAMapNaviKit_Tests-umbrella.h"
+
+  export *
+  module * { export * }
+}

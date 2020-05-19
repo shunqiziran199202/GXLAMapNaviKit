@@ -1,0 +1,22 @@
+{
+  "name": "GXLAMapNaviKit",
+  "version": "0.1.0",
+  "summary": "A short description of GXLAMapNaviKit.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/bpdnd/GXLAMapNaviKit",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "bpdnd": "2405632981@qq.com"
+  },
+  "source": {
+    "git": "https://github.com/bpdnd/GXLAMapNaviKit.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "GXLAMapNaviKit/Classes/**/*"
+}

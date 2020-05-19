@@ -1,0 +1,16 @@
+PODS:
+  - GXLAMapNaviKit (0.1.0)
+
+DEPENDENCIES:
+  - GXLAMapNaviKit (from `../`)
+
+EXTERNAL SOURCES:
+  GXLAMapNaviKit:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  GXLAMapNaviKit: dee5fee6321fa8bf6b5e29165c60d6007afd7218
+
+PODFILE CHECKSUM: 2667f8ca9c49f108a02e02737e6512f1f8ea1979
+
+COCOAPODS: 1.9.1
