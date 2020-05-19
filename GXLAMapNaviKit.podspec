@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'GXLAMapNaviKit'
-  s.version          = '0.1.1'
+  s.version          = '0.1.2'
   s.summary          = 'GXLAMapNaviKit.'
   s.swift_version    =  '5'
 # This description is used to generate tags and improve search results.
@@ -21,7 +21,7 @@ Pod::Spec.new do |s|
 GXLAMapNaviKit 高德地图 导航
                        DESC
 
-  s.homepage         = 'https://github.com/shunqiziran199202/GXLAMapNaviKit'
+  s.homepage         = 'https://github.com/shunqiziran199202'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'bpdnd' => '3438291751@qq.com' }

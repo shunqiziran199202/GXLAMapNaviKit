@@ -1,5 +1,8 @@
 use_frameworks!
 
+source 'https://github.com/CocoaPods/Specs.git'
+source 'https://gitee.com/bpdnd/GXLSpec.git'
+
 target 'GXLAMapNaviKit_Example' do
   pod 'GXLAMapNaviKit', :path => '../'
 
