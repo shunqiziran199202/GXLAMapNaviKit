@@ -153,6 +153,13 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)driveManager:(AMapNaviDriveManager *)driveManager updateBackupRoute:(nullable NSArray<AMapNaviRoute *> *)backupRoutes;
 
+/**
+ * @brief 前方拥堵区域信息的更新回调. since 7.5.0
+ * @param driveManager 驾车导航管理类
+ * @param congestionInfo 拥堵区域信息, 参考 AMapNaviCongestionInfo 类，如果已通过该拥堵区域或者其不再拥堵时，congestionInfo会返回nil
+ */
+- (void)driveManager:(AMapNaviDriveManager *)driveManager updateCongestionInfo:(nullable AMapNaviCongestionInfo *)congestionInfo;
+
 #pragma mark - 智能巡航
 
 /**

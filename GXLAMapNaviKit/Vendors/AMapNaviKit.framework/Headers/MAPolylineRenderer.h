@@ -10,6 +10,7 @@
 #import <UIKit/UIKit.h>
 #import "MAPolyline.h"
 #import "MAOverlayPathRenderer.h"
+#import "MAPathShowRange.h"
 
 ///此类用于绘制MAPolyline,可以通过MAOverlayPathRenderer修改其fill和stroke attributes
 @interface MAPolylineRenderer : MAOverlayPathRenderer
@@ -28,6 +29,12 @@
 
 ///用于调整点击选中热区大小，默认为0. 负值增大热区，正值减小热区. since 7.1.0
 @property (nonatomic, assign) CGFloat hitTestInset;
+
+///是否启用显示范围，YES启用，不启用时展示全路径 since 7.5.0
+@property (nonatomic, assign) BOOL showRangeEnabled;
+
+///显示范围 since 7.5.0
+@property (nonatomic, assign) MAPathShowRange showRange;
 
 /**
  * @brief 根据指定的MAPolyline生成一个多段线Renderer

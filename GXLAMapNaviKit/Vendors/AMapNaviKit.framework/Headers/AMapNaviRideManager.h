@@ -64,6 +64,26 @@ NS_ASSUME_NONNULL_BEGIN
 ///当前导航路径的信息,参考 AMapNaviRoute 类.
 @property (nonatomic, readonly, nullable) AMapNaviRoute *naviRoute;
 
+/**
+ * @brief 多路径规划时的所有路径信息 since 7.5.0
+ * @return 返回多路径规划时的所有路径ID和路线信息
+ */
+- (NSDictionary<NSNumber *,AMapNaviRoute *> *)naviRoutes;
+
+
+/**
+ * @brief 多路径规划时的所有路径ID,路径ID为 NSInteger 类型 since 7.5.0
+ * @return 返回多路径规划时的所有路径ID
+ */
+- (NSArray<NSNumber *> *)naviRouteIDs;
+
+/**
+ * @brief 多路径规划时选择路径.注意:该方法仅限于在开始导航前使用,开始导航后该方法无效 since 7.5.0
+ * @param routeID 路径ID
+ * @return 是否选择路径成功
+ */
+- (BOOL)selectNaviRouteWithRouteID:(NSInteger)routeID;
+
 #pragma mark - Options
 
 ///偏航时是否重新计算路径,默认YES(需要联网).
@@ -91,6 +111,17 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (BOOL)calculateRideRouteWithStartPoint:(AMapNaviPoint *)startPoint
                                 endPoint:(AMapNaviPoint *)endPoint;
+
+/**
+ * @brief 根据高德POIInfo进行骑行路径规划. since 7.5.0
+ * @param startPOIInfo  起点POIInfo, 参考 AMapNaviPOIInfo. 如果以“我的位置”作为起点,请传nil. 如果startPOIInfo不为nil,那么POIID合法,优先使用ID参与算路,否则使用坐标点
+ * @param endPOIInfo  终点POIInfo, 参考 AMapNaviPOIInfo. 如果POIID合法,优先使用ID参与算路,否则使用坐标点. 注意:POIID和坐标点不能同时为空
+ * @param strategy  路径的计算策略，参考 AMapNaviTravelStrategy.
+ * @return 规划路径所需条件和参数校验是否成功，不代表算路成功与否
+*/
+- (BOOL)calculateRideRouteWithStartPOIInfo:(nullable AMapNaviPOIInfo *)startPOIInfo
+                                 endPOIInfo:(nonnull AMapNaviPOIInfo *)endPOIInfo
+                                   strategy:(AMapNaviTravelStrategy)strategy;
 
 /**
  * @brief 导航过程中重新规划路径(起点为当前位置,终点位置不变)

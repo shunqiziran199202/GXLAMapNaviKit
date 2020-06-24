@@ -21,7 +21,7 @@
 @property (nonatomic, assign) double altitude;
 
 ///方向
-@property (nonatomic, assign) NSInteger heading;
+@property (nonatomic, assign) double heading;
 
 ///速度(km/h)
 @property (nonatomic, assign) NSInteger speed;

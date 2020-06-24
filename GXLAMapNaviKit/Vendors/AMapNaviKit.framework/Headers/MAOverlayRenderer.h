@@ -11,14 +11,6 @@
 #import "MAOverlay.h"
 #import "MALineDrawType.h"
 
-///虚线类型
-typedef NS_ENUM(NSUInteger, MALineDashType) {
-    kMALineDashTypeNone = 0,     ///<不画虚线
-    kMALineDashTypeSquare,       ///<方块样式
-    kMALineDashTypeDot,          ///<圆点样式
-};
-
-
 #define kMAOverlayRendererDefaultStrokeColor [UIColor colorWithRed:0.3 green:0.63 blue:0.89 alpha:0.8]
 #define kMAOverlayRendererDefaultFillColor [UIColor colorWithRed:0.77 green:0.88 blue:0.94 alpha:0.8]
 

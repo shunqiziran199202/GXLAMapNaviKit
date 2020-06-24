@@ -9,6 +9,51 @@
 #import <Foundation/Foundation.h>
 #import "AMapNaviCommonObj.h"
 
+#pragma mark - AMapNaviRouteGuideSegment since 7.5.0
+
+///路线详情的分段信息. since 7.5.0
+@interface AMapNaviRouteGuideSegment : NSObject<NSCopying>
+
+///分段的转向类型
+@property (nonatomic, assign) AMapNaviIconType iconType;
+
+///分段的详细描述
+@property (nonatomic, strong) NSString *detailedDescription;
+
+///分段是否到达途径点
+@property (nonatomic, assign) BOOL isArriveWayPoint;
+
+@end
+
+#pragma mark - AMapNaviRouteGuideGroup since 7.5.0
+
+///路线详情的分组信息. since 7.5.0
+@interface AMapNaviRouteGuideGroup : NSObject<NSCopying>
+
+///分组的名称描述
+@property (nonatomic, strong) NSString *groupName;
+
+///分组的长度(单位:米)
+@property (nonatomic, assign) NSInteger distance;
+
+///分组的转向类型和该组中分段的第一个转向类型一致
+@property (nonatomic, assign) AMapNaviIconType iconType;
+
+///分组的预估时间(单位:秒)
+@property (nonatomic, assign) NSInteger time;
+
+///分组导航段路口点的坐标
+@property (nonatomic, strong) AMapNaviPoint *coordinate;
+
+///分组中的所有分段
+@property (nonatomic, strong) NSArray <AMapNaviRouteGuideSegment *> *guideSegments;
+
+///分组的红绿灯数量，注意:只针对驾车.
+@property (nonatomic, assign) NSInteger trafficLightCount;
+
+@end
+
+
 // AMapNaviLink --组成--> AMapNaviSegment --组成--> AMapNaviRoute
 
 #pragma mark - AMapNaviLink
@@ -171,5 +216,7 @@
 ///当前路线的唯一标识ID . since 6.7.0
 @property (nonatomic, assign) NSUInteger routeUID;
 
+///路线详情信息.  since 7.5.0
+@property (nonatomic, strong) NSArray <AMapNaviRouteGuideGroup *> *guideGroups;
 
 @end

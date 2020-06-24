@@ -33,6 +33,9 @@
 ///z值，大值在上，默认为0. 类似CALayer的zPosition
 @property (nonatomic, assign) NSInteger zIndex;
 
+///导航界面添加的自定义标注是否可以响应事件,默认为NO. since 7.5.0
+@property (nonatomic, assign) BOOL enable;
+
 /**
  * @brief 初始化导航界面自定义标注. since 5.5.0
  * @param coordinate 标注的中心坐标.
@@ -40,7 +43,5 @@
  * @return id 自定义标注对象
  */
 - (id)initWithCoordinate:(CLLocationCoordinate2D)coordinate view:(UIView *)view;
-
-
 
 @end

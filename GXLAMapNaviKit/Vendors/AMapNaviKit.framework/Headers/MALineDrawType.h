@@ -28,4 +28,13 @@ enum MALineCapType
 };
 typedef enum MALineCapType MALineCapType;
 
+///虚线类型
+enum MALineDashType
+{
+    kMALineDashTypeNone = 0,     ///<不画虚线
+    kMALineDashTypeSquare,       ///<方块样式
+    kMALineDashTypeDot,          ///<圆点样式
+};
+typedef enum MALineDashType MALineDashType;
+
 #endif

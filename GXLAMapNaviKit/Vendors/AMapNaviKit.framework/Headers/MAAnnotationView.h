@@ -73,6 +73,9 @@ typedef NS_ENUM(NSInteger, MAAnnotationViewDragState)
 ///当前view的拖动状态
 @property (nonatomic) MAAnnotationViewDragState dragState;
 
+///弹出默认弹出框时，是否允许地图调整到合适位置来显示弹出框，默认为YES
+@property (nonatomic) BOOL canAdjustPositon;
+
 /**
  * @brief 设置是否处于选中状态, 外部如果要选中请使用mapView的selectAnnotation方法
  * @param selected 是否选中

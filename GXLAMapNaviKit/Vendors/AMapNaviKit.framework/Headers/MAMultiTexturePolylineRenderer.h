@@ -24,6 +24,12 @@
 ///取分段纹理id,返回分段纹理id数组, 如果strokeTextureImages未指定、尚未加载或加载失败，返回值可能包含0
 @property (nonatomic, strong, readonly) NSArray<NSNumber*> *strokeTextureIDs;
 
+///是否启用显示范围，YES启用，不启用时展示全路径 since 7.5.0
+@property (nonatomic, assign) BOOL showRangeEnabled;
+
+///显示范围 since 7.5.0
+@property (nonatomic, assign) MAPathShowRange showRange;
+
 /**
  * @brief 根据指定的MAMultiPolyline生成一个多段线Renderer
  * @param multiPolyline 指定MAMultiPolyline

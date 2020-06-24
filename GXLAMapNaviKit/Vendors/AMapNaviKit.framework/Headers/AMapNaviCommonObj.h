@@ -42,6 +42,13 @@ typedef NS_ENUM(NSInteger, AMapNaviDriveViewShowMode)
     AMapNaviDriveViewShowModeNormal = 3,            ///< 普通状态
 };
 
+///骑步行算路策略. since 7.5.0
+typedef NS_ENUM(NSInteger, AMapNaviTravelStrategy)
+{
+    AMapNaviTravelStrategySingleDefault = 1000,     ///< 算路支持一条
+    AMapNaviTravelStrategyMultipleDefault = 1001,   ///< 算路支持多条
+};
+
 ///驾车、货车路径规划策略. 注意:货车只能用10、12-20 这10种策略
 typedef NS_ENUM(NSInteger, AMapNaviDrivingStrategy)
 {
@@ -824,10 +831,10 @@ FOUNDATION_EXTERN AMapNaviDrivingStrategy ConvertDrivingPreferenceToDrivingStrat
 ///设置货车的长度,范围:(0,25],单位：米
 @property (nonatomic, assign) CGFloat length;
 
-///设置货车的核定载重,范围:(0,100],单位：吨. 注意:核定载重应小于总重量
+///设置货车的总重，范围:(0,100]，单位：吨. 注意：总重 = 车重 + 核定载重
 @property (nonatomic, assign) CGFloat load;
 
-///设置货车的总重量,范围:(0,100],单位：吨. 注意:核定载重应小于总重量
+///设置货车的核定载重，范围:(0,100)，单位：吨.
 @property (nonatomic, assign) CGFloat weight;
 
 @end

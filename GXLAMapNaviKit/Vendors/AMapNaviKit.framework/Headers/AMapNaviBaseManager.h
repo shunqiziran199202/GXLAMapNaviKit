@@ -53,14 +53,6 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)setExternalLocation:(CLLocation *)externalLocation isAMapCoordinate:(BOOL)isAMapCoordinate;
 
-#pragma mark - Navi Guide
-
-/**
- * @brief 获取导航路线的路线详情列表
- * @return 导航路线的路线详情列表,参考 AMapNaviGuide 类.
- */
-- (nullable NSArray<AMapNaviGuide *> *)getNaviGuideList;
-
 #pragma mark - GPS & Emulator Navi
 
 /**
@@ -103,6 +95,16 @@ NS_ASSUME_NONNULL_BEGIN
  * @return 是否成功
  */
 - (BOOL)readNaviInfoManual;
+
+
+#pragma mark - Navi Guide
+
+/**
+ * @brief 获取导航路线的路线详情列表
+ * @return 导航路线的路线详情列表,参考 AMapNaviGuide 类.
+ */
+- (nullable NSArray<AMapNaviGuide *> *)getNaviGuideList  __attribute__((deprecated("已废弃，请使用 AMapNaviRoute 中的 guideGroups 替代  since 7.5.0")));
+
 
 @end
 

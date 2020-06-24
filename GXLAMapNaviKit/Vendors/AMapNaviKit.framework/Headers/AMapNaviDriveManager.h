@@ -249,7 +249,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @brief 设置Xcode模拟定位点是否参与导航. 注意：此方法仅供开发者调试使用. since 6.7.0
  * @param enableNavi 模拟的定位点是否参与导航, 默认为NO.
  */
-- (void)setXcodeSimulateLocationEnable:(BOOL)enableNavi;
+- (void)setXcodeSimulateLocationEnable:(BOOL)enableNavi __attribute__((deprecated("已废弃，since 7.5.0")));
 
 #pragma mark - Statistics Information
 
