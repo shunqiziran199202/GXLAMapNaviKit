@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'GXLAMapNaviKit'
-  s.version          = '7.5.0'
+  s.version          = '7.5.1'
   s.summary          = 'GXLAMapNaviKit.'
   s.swift_version    =  '5'
 # This description is used to generate tags and improve search results.
@@ -19,6 +19,7 @@ Pod::Spec.new do |s|
 
   s.description      = <<-DESC
 GXLAMapNaviKit 高德地图 导航
+
                        DESC
 
   s.homepage         = 'https://github.com/shunqiziran199202'
@@ -56,6 +57,18 @@ GXLAMapNaviKit 高德地图 导航
       export *
     }
     \EOF
+    
+    # 创建search Module
+    rm -rf GXLAMapNaviKit/Vendors/AMapSearchKit.framework/Modules
+    mkdir GXLAMapNaviKit/Vendors/AMapSearchKit.framework/Modules
+    touch GXLAMapNaviKit/Vendors/AMapSearchKit.framework/Modules/module.modulemap
+    cat <<-EOF > GXLAMapNaviKit/Vendors/AMapSearchKit.framework/Modules/module.modulemap
+    framework module AMapSearchKit {
+      umbrella header "AMapSearchKit.h"
+      export *
+    }
+    \EOF
+    
   EOF
   # s.resource_bundles = {
   #   'GXLAMapNaviKit' => ['GXLAMapNaviKit/Assets/*.png']

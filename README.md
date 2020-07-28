@@ -19,6 +19,10 @@ it, simply add the following line to your Podfile:
 ```ruby
 pod 'GXLAMapNaviKit'
 ```
+##
+AMapNaviKit ->7.5.0
+AMapSearchKit->7.4.0
+
 
 ## Author
 
