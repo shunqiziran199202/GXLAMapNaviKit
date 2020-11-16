@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'GXLAMapNaviKit'
-  s.version          = '7.6.0'
+  s.version          = '7.6.1'
   s.summary          = 'GXLAMapNaviKit.'
   s.swift_version    =  '5'
 # This description is used to generate tags and improve search results.
@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-          GXLAMapNaviKit 高德地图 导航
+          GXLAMapNaviKit 高德地图 导航 7.6.0
 
                        DESC
 
@@ -102,10 +102,10 @@ Pod::Spec.new do |s|
     \EOF
     
     # 创建Location Module
-    rm -rf GXLAMapNaviKit/Vendors/AMapLocation-NO-IDFA/AMapLocation.framework/Modules
-    mkdir GXLAMapNaviKit/Vendors/AMapLocation-NO-IDFA/AMapLocation.framework/Modules
-    touch GXLAMapNaviKit/Vendors/AMapLocation-NO-IDFA/AMapLocation.framework/Modules/module.modulemap
-    cat <<-EOF > GXLAMapNaviKit/Vendors/AMapLocation-NO-IDFA/AMapLocation.framework/Modules/module.modulemap
+    rm -rf GXLAMapNaviKit/Vendors/AMapLocation-NO-IDFA/AMapLocationKit.framework/Modules
+    mkdir GXLAMapNaviKit/Vendors/AMapLocation-NO-IDFA/AMapLocationKit.framework/Modules
+    touch GXLAMapNaviKit/Vendors/AMapLocation-NO-IDFA/AMapLocationKit.framework/Modules/module.modulemap
+    cat <<-EOF > GXLAMapNaviKit/Vendors/AMapLocation-NO-IDFA/AMapLocationKit.framework/Modules/module.modulemap
     framework module AMapLocation {
       umbrella header "AMapLocation.h"
       export *
