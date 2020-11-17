@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'GXLAMapNaviKit'
-  s.version          = '7.6.1'
+  s.version          = '7.6.2'
   s.summary          = 'GXLAMapNaviKit.'
   s.swift_version    =  '5'
 # This description is used to generate tags and improve search results.
@@ -106,8 +106,8 @@ Pod::Spec.new do |s|
     mkdir GXLAMapNaviKit/Vendors/AMapLocation-NO-IDFA/AMapLocationKit.framework/Modules
     touch GXLAMapNaviKit/Vendors/AMapLocation-NO-IDFA/AMapLocationKit.framework/Modules/module.modulemap
     cat <<-EOF > GXLAMapNaviKit/Vendors/AMapLocation-NO-IDFA/AMapLocationKit.framework/Modules/module.modulemap
-    framework module AMapLocation {
-      umbrella header "AMapLocation.h"
+    framework module AMapLocationKit {
+      umbrella header "AMapLocationKit.h"
       export *
     }
     \EOF

@@ -1,6 +1,4 @@
-framework module AMapLocationKit {
-  umbrella header "AMapLocationKit.h"
-
+framework module AMapLocation {
+  umbrella header "AMapLocation.h"
   export *
-  module * { export * }
 }
