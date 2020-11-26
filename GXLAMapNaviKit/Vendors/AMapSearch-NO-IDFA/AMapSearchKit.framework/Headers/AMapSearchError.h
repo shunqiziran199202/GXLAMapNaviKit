@@ -52,6 +52,7 @@ typedef NS_ENUM(NSInteger, AMapSearchErrorCode)
     AMapSearchErrorOverPassAreaMaxCount   = 1810,///< 避让区域个数超限
     AMapSearchErrorOverPassAreaMaxArea    = 1811,///< 避让区域大小超限
     AMapSearchErrorOverPassAreaPointCount = 1812,///< 避让区域点个数超限
+    AMapSearchErrorOverPassKeyWordLenth   = 1813,///< 搜索关键字长度超限
 
     AMapSearchErrorTableIDNotExist        = 2000,///< table id 格式不正确
     AMapSearchErrorIDNotExist             = 2001,///< id 不存在

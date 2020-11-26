@@ -405,6 +405,12 @@ extern NSString * const kMAMapLayerCameraDegreeKey;
  */
 - (void)forceRefresh;
 
+/**
+ * @brief 设置在建道路图层是否显示。默认NO（since 7.7.0）
+ * @param enabled 是否显示
+ */
+- (void)setConstructingRoadEnable:(BOOL)enabled;
+
 @end
 
 @interface MAMapView (Annotation)

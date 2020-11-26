@@ -62,28 +62,4 @@
 ///当前自车所在的高速或城市快速路的出口路牌信息. 注意:只针对驾车. since 6.8.0
 @property (nonatomic, strong) AMapNaviExitBoardInfo *exitBoardInfo;
 
-///deprecated.自车方向,单位度(正北为0,顺时针增加) \n since 5.0.0 模拟导航和实时导航的自车位置更新都会通过 driveManager:updateNaviLocation: 返回,所以AMapNaviInfo不再提供自车方向
-@property (nonatomic, assign) NSInteger carDirection __attribute__((deprecated("该字段已废弃 since 5.0.0")));
-
-///deprecated.自车经纬度 \n since 5.0.0 模拟导航和实时导航的自车位置更新都会通过 driveManager:updateNaviLocation: 返回,所以AMapNaviInfo不再提供自车经纬度
-@property (nonatomic, strong) AMapNaviPoint *carCoordinate __attribute__((deprecated("该字段已废弃 since 5.0.0")));
-
-///deprecated.电子眼在路径上的编号,总是指下一个将要路过的电子眼的编号,若为-1则路上没有电子眼. \n since 5.0.0 导航过程中的电子眼信息更新会通过 driveManager:updateCameraInfos: 返回
-@property (nonatomic, assign) NSInteger cameraIndex __attribute__((deprecated("该字段已废弃 since 5.0.0")));
-
-///deprecated.电子眼距离(单位:米; -1为没有电子眼或距离很远). \n since 5.0.0 导航过程中的电子眼信息更新会通过 driveManager:updateCameraInfos: 返回
-@property (nonatomic, assign) NSInteger cameraDistance __attribute__((deprecated("该字段已废弃，使用AMapNaviCameraInfo.distance，since 5.0.0")));
-
-///deprecated.电子眼类型(0为测速摄像头,1为监控摄像头). \n since 5.0.0 导航过程中的电子眼信息更新会通过 driveManager:updateCameraInfos: 返回
-@property (nonatomic, assign) NSInteger cameraType __attribute__((deprecated("该字段已废弃，使用AMapNaviCameraInfo.cameraType，since 5.0.0")));
-
-///deprecated.电子眼经纬度. \n since 5.0.0 导航过程中的电子眼信息更新会通过 driveManager:updateCameraInfos: 返回
-@property (nonatomic, strong) AMapNaviPoint *cameraCoordinate __attribute__((deprecated("该字段已废弃，使用AMapNaviCameraInfo.coordinate，since 5.0.0")));
-
-///deprecated.电子眼限速(0为无限速信息). \n since 5.0.0 导航过程中的电子眼信息更新会通过 driveManager:updateCameraInfos: 返回
-@property (nonatomic, assign) NSInteger cameraLimitSpeed __attribute__((deprecated("该字段已废弃，使用AMapNaviCameraInfo.cameraSpeed，since 5.0.0")));
-
-///deprecated.离服务站距离(单位:米; -1为没有服务站). \n since 5.0.0 导航过程中的服务区信息更新会通过 driveManager:updateServiceAreaInfos: 返回
-@property (nonatomic, assign) NSInteger serviceAreaDistance __attribute__((deprecated("该字段已废弃，使用AMapNaviServiceAreaInfo.remainDistance，since 5.0.0")));
-
 @end

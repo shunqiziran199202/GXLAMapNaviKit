@@ -111,12 +111,6 @@ NS_ASSUME_NONNULL_BEGIN
 ///导航中是否播报交通信息,默认YES(需要联网).
 @property (nonatomic, assign) BOOL updateTrafficInfo;
 
-///偏航时是否重新计算路径,默认YES(需要联网). 已废弃, 默认进行重算，since 5.0.0
-@property (nonatomic, assign) BOOL isRecalculateRouteForYaw __attribute__((deprecated("已废弃，默认进行重算，since 5.0.0")));
-
-///前方拥堵时是否重新计算路径,默认YES(需要联网). 已废弃, 默认进行重算，since 5.0.0
-@property (nonatomic, assign) BOOL isRecalculateRouteForTrafficJam __attribute__((deprecated("已废弃，默认进行重算，since 5.0.0")));
-
 ///巡航模式,默认为 AMapNaviDetectedModeNone. 注意：1. 如果已经处在导航模式，要开启巡航模式时，需要先调用 stopNavi 来停止导航，再设置 detectedMode 才能生效 2.如果已经处于巡航模式，要开启导航前，需要先调用setDetectedMode(AMapNaviDetectedModeNone) 来关闭巡航，再开启导航
 @property (nonatomic, assign) AMapNaviDetectedMode detectedMode;
 
@@ -180,6 +174,20 @@ NS_ASSUME_NONNULL_BEGIN
                             drivingStrategy:(AMapNaviDrivingStrategy)strategy;
 
 /**
+ * @brief 独立算路能力接口，可用于不干扰本次导航的单独算路场景. since 7.7.0
+ * @param startPOIInfo  起点POIInfo,参考 AMapNaviPOIInfo. 如果以“我的位置”作为起点,请传nil. 如果startPOIInfo不为nil,那么POIID合法,优先使用ID参与算路,否则使用坐标点.
+ * @param endPOIInfo    终点POIInfo,参考 AMapNaviPOIInfo. 如果POIID合法,优先使用ID参与算路,否则使用坐标点. 注意:POIID和坐标点不能同时为空
+ * @param wayPOIInfos   途经点POIInfo,最多支持16个途经点,超过16个会取前16个. 如果POIID合法,优先使用ID参与算路,否则使用坐标点. 注意:POIID和坐标点不能同时为空
+ * @param strategy      路径的计算策略，建议使用 AMapNaviDrivingStrategyMultipleDefault，与[高德地图]默认策略一致 (避让拥堵+速度优先+避免收费)
+ * @callback 算路完成的回调.  算路成功时，routeGroup 不为空；算路失败时，error 不为空，error.code参照 AMapNaviCalcRouteState.
+ * @return 规划路径所需条件和参数校验是否成功，不代表算路成功与否
+ */
+- (BOOL)independentCalculateDriveRouteWithStartPOIInfo:(nullable AMapNaviPOIInfo *)startPOIInfo
+                                            endPOIInfo:(nonnull AMapNaviPOIInfo *)endPOIInfo
+                                           wayPOIInfos:(nullable NSArray<AMapNaviPOIInfo *> *)wayPOIInfos
+                                       drivingStrategy:(AMapNaviDrivingStrategy)strategy
+                                              callback:(nullable void (^)(AMapNaviRouteGroup *_Nullable routeGroup, NSError *_Nullable error))callback;
+/**
  * @brief 导航过程中重新规划路径(起点为当前位置,途经点和终点位置不变)
  * @param strategy 路径的计算策略，建议使用 AMapNaviDrivingStrategyMultipleDefault，与[高德地图]默认策略一致 (避让拥堵+速度优先+避免收费)
  * @return 重新规划路径所需条件和参数校验是否成功, 不代表算路成功与否, 如非导航状态下调用此方法会返回NO.
@@ -216,17 +224,6 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (BOOL)setOnlineCarHailingType:(AMapNaviOnlineCarHailingType)type;
 
-/**
- * @brief 手动刷新路况信息,调用后会刷新路况光柱. 已废弃，since 5.0.0.
- */
-- (void)refreshTrafficStatusesManual __attribute__((deprecated("已废弃，since 5.0.0")));
-
-/**
- * @brief 设置TTS语音播报每播报一个字需要的时间. 已废弃，使用 driveManagerIsNaviSoundPlaying: 替代，since 5.0.0
- * @param time 每个字的播放时间(范围:[250,500]; 单位:毫秒)
- */
-- (void)setTimeForOneWord:(int)time __attribute__((deprecated("已废弃，使用 driveManagerIsNaviSoundPlaying: 替代，since 5.0.0")));
-
 #pragma mark - Traffic Status
 
 /**
@@ -253,12 +250,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Statistics Information
 
-/**
- * @brief 获取导航统计信息. 已废弃，since 5.0.0
- * @return 导航统计信息, 参考 AMapNaviStatisticsInfo 类.
- */
-- (nullable AMapNaviStatisticsInfo *)getNaviStatisticsInfo __attribute__((deprecated("已废弃，since 5.0.0")));
-
 @end
 
 #pragma mark - Escort
@@ -278,7 +269,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol AMapNaviDriveManagerDelegate <NSObject>
 @optional
-
 /**
  * @brief 发生错误时,会调用代理的此方法
  * @param driveManager 驾车导航管理类
@@ -322,13 +312,13 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)driveManager:(AMapNaviDriveManager *)driveManager didStartNavi:(AMapNaviMode)naviMode;
 
 /**
- * @brief 出现偏航需要重新计算路径时的回调函数.偏航后将自动重新路径规划,该方法将在自动重新路径规划前通知您进行额外的处理.
+ * @brief 出现偏航需要重新计算路径时的回调函数.偏航后 SDK 内部将自动重新路径规划,该方法将在自动重新路径规划前通知您进行额外的处理，您无需自行算路.
  * @param driveManager 驾车导航管理类
  */
 - (void)driveManagerNeedRecalculateRouteForYaw:(AMapNaviDriveManager *)driveManager;
 
 /**
- * @brief 前方遇到拥堵需要重新计算路径时的回调函数.拥堵后将自动重新路径规划,该方法将在自动重新路径规划前通知您进行额外的处理.
+ * @brief 前方遇到拥堵需要重新计算路径时的回调函数.拥堵后 SDK 将自动重新路径规划,该方法将在自动重新路径规划前通知您进行额外的处理，您无需自行算路.
  * @param driveManager 驾车导航管理类
  */
 - (void)driveManagerNeedRecalculateRouteForTrafficJam:(AMapNaviDriveManager *)driveManager;

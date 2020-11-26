@@ -33,14 +33,14 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)rideManager:(AMapNaviRideManager *)rideManager updateNaviMode:(AMapNaviMode)naviMode;
 
 /**
- * @brief 路径ID更新回调
+ * @brief 路径ID更新回调. 注意：请不要在此回调中调用 -selectNaviRouteWithRouteID: 接口，否则会出现死循环调用.
  * @param rideManager 骑行导航管理类
  * @param naviRouteID 导航路径ID
  */
 - (void)rideManager:(AMapNaviRideManager *)rideManager updateNaviRouteID:(NSInteger)naviRouteID;
 
 /**
- * @brief 路径信息更新回调
+ * @brief 路径信息更新回调. 注意：请不要在此回调中调用 -selectNaviRouteWithRouteID: 接口，否则会出现死循环调用.
  * @param rideManager 骑行导航管理类
  * @param naviRoute 路径信息,参考 AMapNaviRoute 类
  */

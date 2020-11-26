@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'GXLAMapNaviKit'
-  s.version          = '7.6.2'
+  s.version          = '7.6.3'
   s.summary          = 'GXLAMapNaviKit.'
   s.swift_version    =  '5'
 # This description is used to generate tags and improve search results.
@@ -18,7 +18,11 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-          GXLAMapNaviKit 高德地图 导航 7.6.0
+   AMap3DMap-NO-IDFA (7.7.0)
+   AMapFoundation-NO-IDFA (1.6.5.1)
+   AMapLocation-NO-IDFA (2.6.7)
+   AMapNavi-NO-IDFA (7.7.1)
+   AMapSearch-NO-IDFA (7.7.0)
 
                        DESC
 

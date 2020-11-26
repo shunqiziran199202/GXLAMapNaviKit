@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class AMapNaviRoute;
 @class AMapNaviLocation;
 @class AMapNaviStatisticsInfo;
+@class AMapNaviRouteGroup;
 
 ///注意:该类为导航控制器基类,请不要直接使用
 @interface AMapNaviBaseManager : NSObject
@@ -43,7 +44,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///外部传入定位信息(enableExternalLocation为YES时有效).该方法坐标需使用WGS84坐标系.
 @property (nonatomic, copy) CLLocation *externalLocation;
 
-///是否使用内置语音进行导航播报, 如果为YES，就是由导航SDK来播报导航信息. 默认为NO. since 5.5.0
+///是否使用内置播放器进行导航播报, 如果为YES，就是由导航SDK来播报导航信息. 默认为NO. since 5.5.0
 @property (nonatomic, assign) BOOL isUseInternalTTS;
 
 /**
@@ -72,6 +73,20 @@ NS_ASSUME_NONNULL_BEGIN
  * @return 是否成功
  */
 - (BOOL)startGPSNavi;
+
+/**
+ * @brief 开始模拟导航. 注意：必须传入导航的路线组合routeGroup，才能够开始模拟导航. since 7.7.0
+ * @param routeGroup 本次导航需要传入的路线组合
+ * @return 是否成功
+ */
+- (BOOL)startEmulatorNavi:(AMapNaviRouteGroup *)routeGroup;
+
+/**
+ * @brief 开始实时导航.  注意：必须传入导航的路线组合routeGroup，才能够开始实时导航. since 7.7.0
+ * @param routeGroup 本次导航需要传入的路线组合
+ * @return 是否成功
+ */
+- (BOOL)startGPSNavi:(AMapNaviRouteGroup *)routeGroup;
 
 /**
  * @brief 停止导航,包含实时导航和模拟导航
@@ -104,7 +119,6 @@ NS_ASSUME_NONNULL_BEGIN
  * @return 导航路线的路线详情列表,参考 AMapNaviGuide 类.
  */
 - (nullable NSArray<AMapNaviGuide *> *)getNaviGuideList  __attribute__((deprecated("已废弃，请使用 AMapNaviRoute 中的 guideGroups 替代  since 7.5.0")));
-
 
 @end
 

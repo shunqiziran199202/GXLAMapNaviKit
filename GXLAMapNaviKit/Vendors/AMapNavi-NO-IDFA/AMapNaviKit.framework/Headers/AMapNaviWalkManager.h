@@ -124,6 +124,19 @@ NS_ASSUME_NONNULL_BEGIN
                                    strategy:(AMapNaviTravelStrategy)strategy;
 
 /**
+ * @brief 独立算路能力接口，可用于不干扰本次导航的单独算路场景. since 7.7.0
+ * @param startPOIInfo  起点POIInfo, 参考 AMapNaviPOIInfo. 如果以“我的位置”作为起点,请传nil. 如果startPOIInfo不为nil,那么POIID合法,优先使用ID参与算路,否则使用坐标点
+ * @param endPOIInfo  终点POIInfo, 参考 AMapNaviPOIInfo. 如果POIID合法,优先使用ID参与算路,否则使用坐标点. 注意:POIID和坐标点不能同时为空
+ * @param strategy  路径的计算策略，参考 AMapNaviTravelStrategy.
+ * @callback 算路完成的回调.  算路成功时，routeGroup 不为空；算路失败时，error 不为空，error.code参照 AMapNaviCalcRouteState.
+ * @return 规划路径所需条件和参数校验是否成功，不代表算路成功与否
+ */
+- (BOOL)independentCalculateRideRouteWithStartPOIInfo:(nullable AMapNaviPOIInfo *)startPOIInfo
+                                           endPOIInfo:(nonnull AMapNaviPOIInfo *)endPOIInfo
+                                             strategy:(AMapNaviTravelStrategy)strategy
+                                             callback:(nullable void (^)(AMapNaviRouteGroup *_Nullable routeGroup, NSError *_Nullable error))callback;
+
+/**
  * @brief 导航过程中重新规划路径(起点为当前位置,终点位置不变)
  * @return 重新规划路径所需条件和参数校验是否成功， 不代表算路成功与否，如非导航状态下调用此方法会返回NO.
  */

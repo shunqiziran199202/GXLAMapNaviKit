@@ -76,17 +76,6 @@ typedef NS_ENUM(NSInteger, AMapNaviDrivingStrategy)
     AMapNaviDrivingStrategyMultipleAvoidHighwayAndCostAndCongestion = 18,   ///< 18  多路径: 不走高速 & 避免收费 & 躲避拥堵
     AMapNaviDrivingStrategyMultiplePrioritiseHighway = 19,                  ///< 19  多路径: 高速优先
     AMapNaviDrivingStrategyMultiplePrioritiseHighwayAvoidCongestion = 20,   ///< 20  多路径: 高速优先 & 躲避拥堵
-    
-    ///Deprecated
-    AMapNaviDrivingStrategyDefault __attribute__ ((deprecated("use AMapNaviDrivingStrategySingleDefault instead"))) = AMapNaviDrivingStrategySingleDefault ,
-    AMapNaviDrivingStrategySaveMoney __attribute__ ((deprecated("use AMapNaviDrivingStrategySingleAvoidCost instead"))) = AMapNaviDrivingStrategySingleAvoidCost,
-    AMapNaviDrivingStrategyShortDistance __attribute__ ((deprecated("use AMapNaviDrivingStrategySinglePrioritiseDistance instead"))) = AMapNaviDrivingStrategySinglePrioritiseDistance,
-    AMapNaviDrivingStrategyNoExpressways __attribute__ ((deprecated("use AMapNaviDrivingStrategySingleAvoidExpressway instead"))) = AMapNaviDrivingStrategySingleAvoidExpressway,
-    AMapNaviDrivingStrategyFastestTime __attribute__ ((deprecated("use AMapNaviDrivingStrategySingleAvoidCongestion instead"))) = AMapNaviDrivingStrategySingleAvoidCongestion,
-    AMapNaviDrivingStrategyDefaultAndFastest __attribute__ ((deprecated("use AMapNaviDrivingStrategyMultipleAvoidCongestion instead"))) = AMapNaviDrivingStrategyMultipleAvoidCongestion,
-    AMapNaviDrivingStrategyDefaultAndShort __attribute__ ((deprecated("use AMapNaviDrivingStrategyMultipleDefault instead"))) = AMapNaviDrivingStrategyMultipleDefault,
-    AMapNaviDrivingStrategyAvoidCongestion __attribute__ ((deprecated("use AMapNaviDrivingStrategySingleAvoidCostAndCongestion instead"))) = AMapNaviDrivingStrategySingleAvoidCostAndCongestion,
-    AMapNaviDrivingStrategyDefaultAndFastestAndShort __attribute__ ((deprecated("use AMapNaviDrivingStrategyMultipleAvoidCongestion instead"))) = AMapNaviDrivingStrategyMultipleAvoidCongestion,
 };
 
 ///路径计算状态
@@ -108,6 +97,7 @@ typedef NS_ENUM(NSInteger, AMapNaviCalcRouteState)
     AMapNaviCalcRouteStateRouteFail = 13,                       ///< 13 算路失败（未知错误）
     AMapNaviCalcRouteStateDistanceTooLong = 19,                 ///< 19 起点/终点/途经点的距离太长
     AMapNaviCalcRouteStatePassPointError = 21,                  ///< 21 途经点错误
+    AMapNaviCalcRouteStateHaveNewCalcTaskWorking = 2999,        ///< 2999 有新的算路任务进行中导致本次算路失败
     AMapNaviCalcRouteStateCLAuthorizationStatusDenied = 3000,   ///< 3000 无定位权限
     AMapNaviCalcRouteStateCLAuthorizationReducedAccuracy = 3001,///< 3001 无定位的精确位置权限
 };
@@ -808,34 +798,34 @@ FOUNDATION_EXTERN AMapNaviDrivingStrategy ConvertDrivingPreferenceToDrivingStrat
 ///车牌号,如"京H1N11"
 @property (nonatomic, strong) NSString *vehicleId;
 
-///是否开启ETA请求的躲避车辆限行, 默认为YES. 注意：只有设置为YES, 且设置了车牌号才能躲避车辆限行.
+///是否开启ETA请求的躲避车辆限行, 默认为YES. 注意:只有设置为YES, 且设置了车牌号才能躲避车辆限行
 @property (nonatomic, assign) BOOL isETARestriction;
 
-///设置车辆类型,0:小车; 1:货车; 2:纯电动车; 3:纯电动货车; 4:插电式混动汽车; 5:插电式混动货车. 默认0(小车). 注意:只有设置了货车，其他关于货车的属性设置才会生效
+///设置车辆类型, 0:燃油客车; 1:燃油货车; 2:纯电动客车; 3:纯电动货车; 4:插电式混动客车; 5:插电式混动货车. 默认0(小车). 注意:只有设置了货车, 其他关于货车的属性设置才会生效
 @property (nonatomic, assign) NSInteger type;
 
-///算路时是否忽略货车重量，默认为No,即不忽略，也就是算路时会考虑货车的重量. 如为YES,就会忽略货车重量. since 6.2.0
+///算路时是否忽略货车重量, 默认为No, 即不忽略, 也就是算路时会考虑货车的重量. 如为YES,就会忽略货车重量. since 6.2.0
 @property (nonatomic, assign) BOOL isLoadIgnore;
 
-///设置货车的类型(大小),1:微型货车; 2:轻型/小型货车; 3:中型货车; 4:重型货车
+///设置货车的类型(大小), 1:微型货车; 2:轻型/小型货车; 3:中型货车; 4:重型货车, 默认为2
 @property (nonatomic, assign) NSInteger size;
 
-///设置货车的轴数（用来计算过路费及限重）
+///设置货车的轴数(用来计算过路费及限重), 取值[0-255], type = 1时生效, 默认为2
 @property (nonatomic, assign) NSInteger axisNums;
 
-///设置货车的宽度,范围:(0,5],单位：米
+///设置货车的宽度, 范围:[0-25.5], 单位:米, type = 1时生效, 默认2.5米
 @property (nonatomic, assign) CGFloat width;
 
-///设置货车的高度,范围:(0,10],单位：米
+///设置货车的高度, 范围:取值[0-25.5], 单位:米, type = 1时生效, 默认1.6米
 @property (nonatomic, assign) CGFloat height;
 
-///设置货车的长度,范围:(0,25],单位：米
+///设置货车的最大长度, 取值[0-25], 单位:米, type = 1时生效, 默认6米
 @property (nonatomic, assign) CGFloat length;
 
-///设置货车的总重，范围:(0,100]，单位：吨. 注意：总重 = 车重 + 核定载重
+///设置货车的总重, 范围:取值[0-6553.5], 单位:吨, type = 1时生效, 注意:总重 = 车重 + 核定载重
 @property (nonatomic, assign) CGFloat load;
 
-///设置货车的核定载重，范围:(0,100)，单位：吨.
+///设置货车的核定载重, 范围:取值[0-6553.5], 单位:吨, type = 1时生效
 @property (nonatomic, assign) CGFloat weight;
 
 @end
@@ -1089,6 +1079,5 @@ FOUNDATION_EXTERN AMapNaviDrivingStrategy ConvertDrivingPreferenceToDrivingStrat
 @property (nonatomic, strong) NSArray <NSString *> *directionInfos;
 
 @end
-
 
 
